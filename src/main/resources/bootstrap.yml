@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: server-demo
+  cloud:
+    config:
+      uri: http://localhost:9000
+      profile: ${DEPLOY_ENV:dev}
+      label: master
 
 eureka:
   instance:
@@ -11,4 +16,12 @@ eureka:
   client:
     service-url:
       defaultZone: http://peer1:8761/eureka,http://peer2:8762/eureka
+
+management:
+  security:
+    enabled: false
+
+# refresh config after value change in git
+# curl -X POST http://localhost:9001/refresh
+
 
